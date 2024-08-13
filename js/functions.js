@@ -1,19 +1,8 @@
-// Функция для проверки длины строки.
-// Принимает строку, которую нужно проверить, и максимальную длину и возвращает true,
-// если строка меньше или равна указанной длине, и false, если строка длиннее
+// Функция для проверки длины строки
 
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
 checkStringLength('проверяемая строка', 20);
-
-// Строка короче 20 символов
-//console.log(checkStringLength('проверяемая строка', 20)); // true
-
-// Длина строки ровно 18 символов
-//console.log(checkStringLength('проверяемая строка', 18)); // true
-
-// Строка длиннее 10 символов
-//console.log(checkStringLength('проверяемая строка', 10)); // false
 
 // Функция для проверки, является ли строка палиндромом.
 
@@ -27,18 +16,6 @@ const checkPalindrome = (string) => {
 };
 
 checkPalindrome('топот');
-
-// Строка является палиндромом
-//console.log(checkPalindrome('топот')); // true
-
-// Несмотря на разный регистр, тоже палиндром
-//console.log(checkPalindrome('ДовОд')); // true
-
-// Это не палиндром
-//console.log(checkPalindrome('Кекс')); // false
-
-// Это палиндром
-//console.log(checkPalindrome('Лёша на полке клопа нашёл ')); // true
 
 // Дополнительное задание
 // Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа.
@@ -60,10 +37,31 @@ const getNumber = (string) => {
 
 getNumber('ECMAScript 2022');
 
-//console.log(getNumber('ECMAScript 2022')); // 2022
-//console.log(getNumber('1 кефир, 0.5 батона')); // 105
-//console.log(getNumber('агент 007')); // 7
-//console.log(getNumber('а я томат')); // NaN
-//console.log(getNumber(2023)); // 2023
-//console.log(getNumber(-1)); // 1
-//console.log(getNumber(1.5)); // 15
+// функция, которая принимает время начала и конца рабочего дня, а также время старта и продолжительность встречи в минутах
+// и возвращает true, если встреча не выходит за рамки рабочего дня, и false, если выходит.
+
+const convertTimeMinutes = (time) => {
+  const timeArr = time.split(':').map((element) => Number(element));
+  return timeArr[0] * 60 + timeArr[1];
+};
+
+const checkCorrectTime = (startDay, endDay, startMeet, time) => {
+  const startDayMinutes = convertTimeMinutes(startDay);
+  const endDayMinutes = convertTimeMinutes(endDay);
+  const startMeetMinutes = convertTimeMinutes(startMeet);
+
+  return startDayMinutes <= startMeetMinutes && (startMeetMinutes + time) <= endDayMinutes;
+
+};
+
+
+// eslint-disable-next-line no-console
+console.log(checkCorrectTime('08:00', '17:30', '14:00', 90)); // true
+// eslint-disable-next-line no-console
+console.log(checkCorrectTime('8:0', '10:0', '8:0', 120)); // true
+// eslint-disable-next-line no-console
+console.log(checkCorrectTime('08:00', '14:30', '14:00', 90)); // false
+// eslint-disable-next-line no-console
+console.log(checkCorrectTime('14:00', '17:30', '08:0', 90)); // false
+// eslint-disable-next-line no-console
+console.log(checkCorrectTime('8:00', '17:30', '08:00', 900)); // false
