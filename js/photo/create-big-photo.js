@@ -7,7 +7,7 @@ const socialComments = bigPhotoBlock.querySelector('.social__comments');
 const commentsTotalCount = bigPhotoBlock.querySelector('.social__comment-total-count');
 const commentsShowCount = bigPhotoBlock.querySelector('.social__comment-shown-count');
 const socialCaption = bigPhotoBlock.querySelector('.social__caption');
-
+const buttonCommentsLoader = bigPhotoBlock.querySelector('.comments-loader');
 
 const createBigPhoto = ({url, description, likes,comments}) => {
   bigPhotoImage.src = url;
@@ -16,11 +16,19 @@ const createBigPhoto = ({url, description, likes,comments}) => {
   likesCount.textContent = likes;
   commentsTotalCount.textContent = comments.length;
 
-  comments.forEach((element) => {
-    socialComments.append(createTemplateComments(element));
-  });
-  commentsShowCount.textContent = socialComments.children.length;
+  const onButtonCommentsLoader = () => {
+    comments.splice(0, 5).forEach((element) => {
+      socialComments.append(createTemplateComments(element));
+      commentsShowCount.textContent = socialComments.children.length;
+      if (comments.length === 0) {
+        buttonCommentsLoader.classList.add('hidden');
+      }
+    });
+  };
+
+  onButtonCommentsLoader();
+  buttonCommentsLoader.addEventListener('click', onButtonCommentsLoader);
 };
 
-export {createBigPhoto, bigPhotoBlock, socialComments};
+export {createBigPhoto, bigPhotoBlock, socialComments, buttonCommentsLoader};
 
