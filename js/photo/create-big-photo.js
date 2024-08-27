@@ -22,5 +22,5 @@ const createBigPhoto = ({url, description, likes,comments}) => {
   commentsShowCount.textContent = socialComments.children.length;
 };
 
-export {createBigPhoto, bigPhotoBlock};
+export {createBigPhoto, bigPhotoBlock, socialComments};
 
