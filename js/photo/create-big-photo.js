@@ -1,5 +1,7 @@
 import { createTemplateComments } from '../comments/create-template-comments';
+import { isEscapeKey } from '../util';
 
+const body = document.querySelector('body');
 const bigPhotoBlock = document.querySelector('.big-picture');
 const bigPhotoImage = bigPhotoBlock.querySelector('img');
 const likesCount = bigPhotoBlock.querySelector('.likes-count');
@@ -9,26 +11,52 @@ const commentsShowCount = bigPhotoBlock.querySelector('.social__comment-shown-co
 const socialCaption = bigPhotoBlock.querySelector('.social__caption');
 const buttonCommentsLoader = bigPhotoBlock.querySelector('.comments-loader');
 
+const stepLoadingComments = 5;
+let indexLoadingComments = 0;
+
+let allComments = [];
+
+const onButtonCommentsLoader = () => {
+  allComments.slice(indexLoadingComments, indexLoadingComments + stepLoadingComments).forEach((element) => {
+    socialComments.append(createTemplateComments(element));
+    commentsShowCount.textContent = socialComments.children.length;
+    if (indexLoadingComments >= (allComments.length - stepLoadingComments) || allComments.length <= 5) {
+      buttonCommentsLoader.classList.add('hidden');
+      indexLoadingComments = 0;
+    }
+  });
+  indexLoadingComments += stepLoadingComments;
+};
+
 const createBigPhoto = ({url, description, likes,comments}) => {
+  allComments = comments;
   bigPhotoImage.src = url;
   bigPhotoImage.alt = description;
   socialCaption.textContent = description;
   likesCount.textContent = likes;
   commentsTotalCount.textContent = comments.length;
-
-  const onButtonCommentsLoader = () => {
-    comments.splice(0, 5).forEach((element) => {
-      socialComments.append(createTemplateComments(element));
-      commentsShowCount.textContent = socialComments.children.length;
-      if (comments.length === 0) {
-        buttonCommentsLoader.classList.add('hidden');
-      }
-    });
-  };
-
   onButtonCommentsLoader();
-  buttonCommentsLoader.addEventListener('click', onButtonCommentsLoader);
+
 };
 
-export {createBigPhoto, bigPhotoBlock, socialComments, buttonCommentsLoader};
+buttonCommentsLoader.addEventListener('click', onButtonCommentsLoader);
+
+const onBigPhotoEscKeydownClose = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeBigPhoto();
+  }
+};
+
+function closeBigPhoto (){
+  bigPhotoBlock.classList.add('hidden');
+  body.classList.remove('modal-open');
+
+  document.removeEventListener('keydown', onBigPhotoEscKeydownClose);
+  indexLoadingComments = 0;
+  socialComments.innerHTML = '';
+  buttonCommentsLoader.classList.remove('hidden');
+}
+
+export {createBigPhoto, indexLoadingComments, closeBigPhoto, onBigPhotoEscKeydownClose };
 
