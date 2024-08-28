@@ -1,6 +1,6 @@
-import {getRandomInteger, createRandomIdFromRangeGenerator} from './util.js';
-import {PHOTO_DESCRIPTIONS} from './data.js';
-import {createComments} from './create-comments.js';
+import {getRandomInteger, createRandomIdFromRangeGenerator} from '../util.js';
+import {PHOTO_DESCRIPTIONS} from '../data/data.js';
+import {createDataComments} from '../comments/create-data-comments.js';
 
 const generatePhotoId = createRandomIdFromRangeGenerator(1, 25);
 const generatePhotoUrl = createRandomIdFromRangeGenerator(1, 25);
@@ -11,10 +11,10 @@ const createDescriptionPhoto = () => ({
   url: `photos/${generatePhotoUrl()}.jpg`,
   description: PHOTO_DESCRIPTIONS[getRandomInteger(0, PHOTO_DESCRIPTIONS.length - 1)],
   likes: generatePhotoLikes(),
-  comments: createComments(),
+  comments: createDataComments(),
 });
 
-
 const getDescriptionPhoto = () => Array.from({length: 25}, createDescriptionPhoto);
+const descriptionPhoto = getDescriptionPhoto();
 
-export {getDescriptionPhoto, generatePhotoId};
+export {descriptionPhoto, generatePhotoId};

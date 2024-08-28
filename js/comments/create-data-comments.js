@@ -1,7 +1,7 @@
-import {PHOTO_COMMENTS, NAMES_USER} from './data.js';
-import {getRandomInteger, createRandomIdFromRangeGenerator} from './util.js';
+import {PHOTO_COMMENTS, NAMES_USER} from '../data/data.js';
+import {getRandomInteger, createRandomIdFromRangeGenerator} from '../util.js';
 
-const createComments = () => {
+const createDataComments = () => {
   const commentsUser = [];
   const idUser = createRandomIdFromRangeGenerator(1, 1000);
   for (let i = 0; i <= getRandomInteger(1, 30); i++) {
@@ -16,4 +16,4 @@ const createComments = () => {
   return commentsUser;
 };
 
-export {createComments};
+export {createDataComments};
