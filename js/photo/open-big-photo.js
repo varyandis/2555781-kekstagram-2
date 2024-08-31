@@ -8,9 +8,9 @@ const buttonClose = bigPhotoBlock.querySelector('.cancel');
 
 const openBigPhoto = function(evt) {
   const pictureElement = evt.target.closest('.picture');
-  const photoId = pictureElement.querySelector('.picture__img').dataset.id;
-  const objectPhoto = descriptionPhoto.find((item) => photoId === String(item.id));
   if (pictureElement) {
+    const photoId = pictureElement.querySelector('.picture__img').dataset.id;
+    const objectPhoto = descriptionPhoto.find((item) => photoId === String(item.id));
     bigPhotoBlock.classList.remove('hidden');
     createBigPhoto(objectPhoto);
     body.classList.add('modal-open');
