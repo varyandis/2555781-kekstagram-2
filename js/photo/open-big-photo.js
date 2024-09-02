@@ -4,7 +4,10 @@ import {createBigPhoto, onBigPhotoEscKeydownClose, closeBigPhoto} from './create
 const bigPhotoBlock = document.querySelector('.big-picture');
 const pictureCollection = document.querySelector('.pictures');
 const body = document.querySelector('body');
+const sliderConteiner = document.querySelector('.img-upload__effect-level');
 const buttonClose = bigPhotoBlock.querySelector('.cancel');
+
+sliderConteiner.classList.add('hidden');
 
 const openBigPhoto = function(evt) {
   const pictureElement = evt.target.closest('.picture');
