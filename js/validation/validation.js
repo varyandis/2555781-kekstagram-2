@@ -11,28 +11,23 @@ const pristine = new Pristine(formBlock, {
   errorTextClass: 'img-upload__field-wrapper--error'
 });
 
-
-const reghashtag = /^#[a-zа-яё0-9]{1,19}$/i;
+const reghashtag = /^#[a-zа-яё0-9]{1,19}$|^$/i;
 
 const validateHashtagCorrect = (values) => {
   let flag = true;
   for (const value of values.trim().split(' ')) {
     flag = reghashtag.test(value);
   }
-  if (values.length === 0) {
-    flag = true;
-  }
   return flag;
-} ;
+};
 
 const validateHashtagCount = (values) => values.split(' ').length <= maxHashtag;
 
 const validateHashtagRepeat = (values) => {
   const arrayHashtags = values.toUpperCase().split(' ');
   const duplicates = arrayHashtags.filter((elem, index, array) => array.indexOf(elem) !== index);
-  return duplicates.length < 1;
+  return duplicates.length === 0;
 };
-
 
 const validateCommentLenght = (values) => values.length < maxCharactersComments;
 
@@ -57,5 +52,3 @@ formBlock.addEventListener('submit', (evt) => {
   // eslint-disable-next-line no-console
   console.log('Можно отправлять');
 });
-
-
