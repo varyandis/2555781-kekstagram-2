@@ -1,3 +1,5 @@
+import './create-upload-photo';
+
 const formBlock = document.querySelector('.img-upload__form');
 const hashtag = formBlock.querySelector('.text__hashtags');
 const comment = formBlock.querySelector('.text__description');
@@ -40,15 +42,40 @@ pristine.addValidator(hashtag, validateHashtagRepeat, 'Хештеги не до�
 
 pristine.addValidator(comment, validateCommentLenght, 'Максимальное количество символов в комментарии: 140');
 
+const setUserFormSubmit = () => {
+  formBlock.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-formBlock.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+    // const formData = new FormData(evt.target);
+    // fetch('https://31.javascript.htmlacademy.pro/kekstagram',
+    //   {
+    //     method: 'POST',
+    //     body: formData,
+    //   },
+    // )
 
-  const isValid = pristine.validate();
-  if (!isValid) {
-    // eslint-disable-next-line no-console
-    return console.log('Форма невалидна');
-  }
-  // eslint-disable-next-line no-console
-  console.log('Можно отправлять');
-});
+    const isValid = pristine.validate();
+    if (isValid) {
+
+
+      const formData = new FormData(evt.target);
+      fetch('https://31.javascript.htmlacademy.pro/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      ) .then((response) => {
+        if (response.ok) {
+          console.log('Не удалось отправить форму. Попробуйте ещё раз12');
+          // onSuccess();
+
+        } else {
+          console.log('Не удалось отправить форму. Попробуйте ещё раз1');
+        }
+      }).catch(() => {
+        console.log('Не удалось отправить форму. Попробуйте ещё раз');
+      });
+}})};
+
+
+export {setUserFormSubmit};

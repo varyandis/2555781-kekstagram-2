@@ -29,7 +29,6 @@ buttonScaleBigger.addEventListener('click', () => {
 
 buttonScaleSmaller.addEventListener('click', () => {
   if (calculatedScale > ScaleSettings.MIN) {
-
     calculatedScale -= ScaleSettings.STEP;
     updateScalePhoto(calculatedScale);
   }

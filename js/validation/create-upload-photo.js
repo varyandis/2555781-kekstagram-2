@@ -6,7 +6,7 @@ const elementEditePhoto = formBlock.querySelector('.img-upload__overlay');
 const buttonClose = formBlock.querySelector('.img-upload__cancel');
 const fieldComments = formBlock.querySelector('.text__description');
 const fieldHashtag = formBlock.querySelector('.text__hashtags');
-
+// const preview = document.querySelector('.img-upload__preview img');
 
 const onbuttonClose = () => {
   elementEditePhoto.classList.add('hidden');

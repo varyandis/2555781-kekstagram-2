@@ -36,7 +36,8 @@ const createBigPhoto = ({url, description, likes,comments}) => {
   likesCount.textContent = likes;
   commentsTotalCount.textContent = comments.length;
   onButtonCommentsLoader();
-
+  // console.log(1)
+// console.log(document.querySelector('.upload-file'))
 };
 
 buttonCommentsLoader.addEventListener('click', onButtonCommentsLoader);
@@ -58,5 +59,5 @@ function closeBigPhoto (){
   buttonCommentsLoader.classList.remove('hidden');
 }
 
-export {createBigPhoto, indexLoadingComments, closeBigPhoto, onBigPhotoEscKeydownClose };
+export {createBigPhoto, closeBigPhoto, onBigPhotoEscKeydownClose };
 
