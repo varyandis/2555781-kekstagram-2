@@ -1,4 +1,4 @@
-import { isEscapeKey } from '../util';
+import { isEscapeKey } from '../util.js';
 
 const formBlock = document.querySelector('.img-upload__form');
 const elementUploadPhoto = formBlock.querySelector('.img-upload__input');
@@ -6,7 +6,6 @@ const elementEditePhoto = formBlock.querySelector('.img-upload__overlay');
 const buttonClose = formBlock.querySelector('.img-upload__cancel');
 const fieldComments = formBlock.querySelector('.text__description');
 const fieldHashtag = formBlock.querySelector('.text__hashtags');
-// const preview = document.querySelector('.img-upload__preview img');
 
 const onbuttonClose = () => {
   elementEditePhoto.classList.add('hidden');
@@ -43,3 +42,4 @@ fields.forEach((field) => {
 
 elementUploadPhoto.addEventListener('change', onButtonLoader);
 
+export {onbuttonClose, onEscapeClose};

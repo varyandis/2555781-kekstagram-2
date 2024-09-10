@@ -1,4 +1,6 @@
-import './create-upload-photo';
+import './create-upload-photo.js';
+import { blockSubmitButton, unblockSubmitButton } from '../photo/edite-photo/block-button.js';
+import { sendData } from '../api.js';
 
 const formBlock = document.querySelector('.img-upload__form');
 const hashtag = formBlock.querySelector('.text__hashtags');
@@ -42,40 +44,17 @@ pristine.addValidator(hashtag, validateHashtagRepeat, 'Хештеги не до�
 
 pristine.addValidator(comment, validateCommentLenght, 'Максимальное количество символов в комментарии: 140');
 
-const setUserFormSubmit = () => {
+const setUserFormSubmit = (onSuccess, onError) => {
   formBlock.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
-    // const formData = new FormData(evt.target);
-    // fetch('https://31.javascript.htmlacademy.pro/kekstagram',
-    //   {
-    //     method: 'POST',
-    //     body: formData,
-    //   },
-    // )
-
     const isValid = pristine.validate();
     if (isValid) {
-
-
-      const formData = new FormData(evt.target);
-      fetch('https://31.javascript.htmlacademy.pro/kekstagram',
-        {
-          method: 'POST',
-          body: formData,
-        },
-      ) .then((response) => {
-        if (response.ok) {
-          console.log('Не удалось отправить форму. Попробуйте ещё раз12');
-          // onSuccess();
-
-        } else {
-          console.log('Не удалось отправить форму. Попробуйте ещё раз1');
-        }
-      }).catch(() => {
-        console.log('Не удалось отправить форму. Попробуйте ещё раз');
-      });
-}})};
+      blockSubmitButton();
+      sendData(new FormData(evt.target)).then(onSuccess).catch(onError)
+        .finally(unblockSubmitButton);
+    }
+  });
+};
 
 
 export {setUserFormSubmit};

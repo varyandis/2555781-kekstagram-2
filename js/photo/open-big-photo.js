@@ -1,4 +1,4 @@
-import {createBigPhoto, onBigPhotoEscKeydownClose, closeBigPhoto} from './create-big-photo';
+import {createBigPhoto, onBigPhotoEscKeydownClose, closeBigPhoto} from './create-big-photo.js';
 
 const bigPhotoBlock = document.querySelector('.big-picture');
 const pictureCollection = document.querySelector('.pictures');

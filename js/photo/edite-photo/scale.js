@@ -11,13 +11,13 @@ const ScaleSettings = {
   DIVIDER: 100,
 };
 
-valueScalePhoto.disabled = true;
+// valueScalePhoto.disabled = true;
 
 let calculatedScale = ScaleSettings.MAX;
 
 const updateScalePhoto = (value) => {
   photoScale.style.transform = `scale(${value / ScaleSettings.DIVIDER})`;
-  valueScalePhoto.setAttribute('value', `${calculatedScale}%`);
+  valueScalePhoto.value = `${value}%`;
 };
 
 buttonScaleBigger.addEventListener('click', () => {

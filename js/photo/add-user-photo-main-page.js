@@ -1,5 +1,6 @@
 const picturesList = document.querySelector('.pictures');
 const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
+const fileInput = document.querySelector('#upload-file');
 
 const createDescriptionPhoto = (data) => {
   data.forEach(({id, url, description, likes, comments}) => {
@@ -16,5 +17,20 @@ const createDescriptionPhoto = (data) => {
     picturesList.append(item);
   });
 };
+
+fileInput.addEventListener('change', () => {
+  const file = fileInput.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event) => {
+      const imagePreview = document.querySelector('.img-upload__preview img');
+      imagePreview.src = event.target.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+});
 
 export {createDescriptionPhoto};

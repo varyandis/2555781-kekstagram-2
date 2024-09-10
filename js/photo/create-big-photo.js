@@ -1,5 +1,5 @@
-import { createTemplateComments } from '../comments/create-template-comments';
-import { isEscapeKey } from '../util';
+import { createTemplateComments } from '../comments/create-template-comments.js';
+import { isEscapeKey } from '../util.js';
 
 const body = document.querySelector('body');
 const bigPhotoBlock = document.querySelector('.big-picture');
@@ -36,8 +36,6 @@ const createBigPhoto = ({url, description, likes,comments}) => {
   likesCount.textContent = likes;
   commentsTotalCount.textContent = comments.length;
   onButtonCommentsLoader();
-  // console.log(1)
-// console.log(document.querySelector('.upload-file'))
 };
 
 buttonCommentsLoader.addEventListener('click', onButtonCommentsLoader);
@@ -52,7 +50,6 @@ const onBigPhotoEscKeydownClose = (evt) => {
 function closeBigPhoto (){
   bigPhotoBlock.classList.add('hidden');
   body.classList.remove('modal-open');
-
   document.removeEventListener('keydown', onBigPhotoEscKeydownClose);
   indexLoadingComments = 0;
   socialComments.innerHTML = '';

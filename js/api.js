@@ -1,13 +1,35 @@
-import { createDescriptionPhoto } from './photo/add-user-photo-main-page';
-import { openPhoto } from './photo/open-big-photo';
-import { setUserFormSubmit } from './validation/validation';
-import { closeBigPhoto } from './photo/create-big-photo';
 
-fetch('https://31.javascript.htmlacademy.pro/kekstagram/data').then((response) => response.json()).then((data) => {
-  createDescriptionPhoto(data);
-  openPhoto(data);
-});
+import './photo/edite-photo/scale.js';
+import { showAlertDowload } from './util.js';
+const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
+const Route = {
+  GET_DATA: '/data',
+  SEND_DATA: '/',
+};
+
+const getData = () => fetch(`${BASE_URL}${Route.GET_DATA}`)
+  .then((response) => {
+    if (response.ok) {
+      return response;
+    }
+    throw new Error(`${response.status} — ${response.statusText}`);
+  }).then((response) => response.json()).catch(showAlertDowload);
+
+const sendData = (body) => fetch(
+  `${BASE_URL}${Route.SEND_DATA}`,
+  {
+    method: 'POST',
+    body: body,
+  }).then((response) => {
+  if (response.ok) {
+    return response;
+  }
+  throw new Error(`${response.status} — ${response.statusText}`);
+}
+);
+// .catch(() => {
+
+// });
 
 
-setUserFormSubmit(closeBigPhoto);
-
+export {getData, sendData};
