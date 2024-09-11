@@ -1,4 +1,4 @@
-import { sliderSetting } from './data-filter';
+import { sliderSetting } from './data-filter.js';
 
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderConteiner = document.querySelector('.img-upload__effect-level');
@@ -14,13 +14,18 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
+const resetSlider = () => {
+  sliderConteiner.classList.add('hidden');
+  targetPhoto.style.filter = 'none';
+};
+
+
 const onPhotoSliderChange = (evt) => {
   const idEffect = evt.target.id;
   const effect = sliderSetting[idEffect];
 
   if (idEffect === 'effect-none') {
-    sliderConteiner.classList.add('hidden');
-    targetPhoto.style.filter = 'none';
+    resetSlider();
     return;
   }
 
@@ -43,4 +48,4 @@ const onPhotoSliderChange = (evt) => {
 
 };
 
-export {onPhotoSliderChange};
+export {onPhotoSliderChange, resetSlider};

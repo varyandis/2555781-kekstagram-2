@@ -1,3 +1,7 @@
+import './create-upload-photo.js';
+import { blockSubmitButton, unblockSubmitButton } from '../photo/edite-photo/block-button.js';
+import { sendData } from '../api.js';
+
 const formBlock = document.querySelector('.img-upload__form');
 const hashtag = formBlock.querySelector('.text__hashtags');
 const comment = formBlock.querySelector('.text__description');
@@ -40,15 +44,17 @@ pristine.addValidator(hashtag, validateHashtagRepeat, 'Хештеги не до�
 
 pristine.addValidator(comment, validateCommentLenght, 'Максимальное количество символов в комментарии: 140');
 
+const setUserFormSubmit = (onSuccess, onError) => {
+  formBlock.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(new FormData(evt.target)).then(onSuccess).catch(onError)
+        .finally(unblockSubmitButton);
+    }
+  });
+};
 
-formBlock.addEventListener('submit', (evt) => {
-  evt.preventDefault();
 
-  const isValid = pristine.validate();
-  if (!isValid) {
-    // eslint-disable-next-line no-console
-    return console.log('Форма невалидна');
-  }
-  // eslint-disable-next-line no-console
-  console.log('Можно отправлять');
-});
+export {setUserFormSubmit};

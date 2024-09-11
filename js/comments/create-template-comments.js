@@ -1,4 +1,4 @@
-// //  Создание теплейта для комментариев
+//  Создание теплейта для комментариев
 const createTemplateComments = ({avatar, name, message}) => {
   const container = document.createElement('li');
   const text = document.createElement('p');

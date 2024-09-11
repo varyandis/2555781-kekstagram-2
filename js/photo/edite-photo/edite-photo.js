@@ -1,5 +1,5 @@
-import './scale';
-import { onPhotoSliderChange } from './nouislider';
+import './scale.js';
+import { onPhotoSliderChange } from './nouislider.js';
 
 const effectListItems = document.querySelectorAll('.effects__radio');
 
