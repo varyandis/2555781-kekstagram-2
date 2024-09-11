@@ -1,4 +1,5 @@
 import { isEscapeKey } from '../util.js';
+import { resetSlider } from '../photo/edite-photo/nouislider.js';
 
 const formBlock = document.querySelector('.img-upload__form');
 const elementUploadPhoto = formBlock.querySelector('.img-upload__input');
@@ -11,6 +12,7 @@ const onbuttonClose = () => {
   elementEditePhoto.classList.add('hidden');
   document.body.classList.remove('modal-open');
   formBlock.reset();
+  resetSlider();
 };
 
 const onEscapeClose = (evt) => {

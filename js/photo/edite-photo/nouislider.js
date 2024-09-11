@@ -14,13 +14,18 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
+const resetSlider = () => {
+  sliderConteiner.classList.add('hidden');
+  targetPhoto.style.filter = 'none';
+};
+
+
 const onPhotoSliderChange = (evt) => {
   const idEffect = evt.target.id;
   const effect = sliderSetting[idEffect];
 
   if (idEffect === 'effect-none') {
-    sliderConteiner.classList.add('hidden');
-    targetPhoto.style.filter = 'none';
+    resetSlider();
     return;
   }
 
@@ -43,4 +48,4 @@ const onPhotoSliderChange = (evt) => {
 
 };
 
-export {onPhotoSliderChange};
+export {onPhotoSliderChange, resetSlider};
