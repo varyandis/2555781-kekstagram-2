@@ -57,4 +57,4 @@ const setUserFormSubmit = (onSuccess, onError) => {
 };
 
 
-export {setUserFormSubmit};
+export {setUserFormSubmit, pristine};

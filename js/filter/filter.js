@@ -21,11 +21,23 @@ const clearAddedPhotos = () => {
   const addedPhotos = document.querySelectorAll('a.picture');
   addedPhotos.forEach((photo) => photo.remove());
 };
+// const debouncedclearAddedPhotos = debounce(() => {
+//   clearAddedPhotos();
+// }, 500);
+
+const debouncedCreatePhoto = debounce((data) => {
+
+  clearAddedPhotos();
+  // debouncedclearAddedPhotos()
+  createDescriptionPhoto(data);
+}, 500);
+
 
 const updatePhotoDisplay = (array, button) => {
   removeActiveClassFromButtons();
-  clearAddedPhotos();
-  debounce(createDescriptionPhoto(array), 500);
+  debouncedCreatePhoto(array);
+  // createDescriptionPhoto(array);
+  // debouncedclearAddedPhotos();
   button.classList.add('img-filters__button--active');
 };
 
@@ -34,19 +46,25 @@ const showfilterRandom = (array, button) => {
   shuffle(shuffleArrayRandom);
   const arrayRandom = shuffleArrayRandom.slice(0, 10);
   updatePhotoDisplay(arrayRandom, button);
+
 };
 
 const showfilterDiscussed = (array, button) => {
   const arrayDiscussed = array.slice().sort((a, b) => b.comments.length - a.comments.length);
-  updatePhotoDisplay(arrayDiscussed, button);
+  removeActiveClassFromButtons();
+  // clearAddedPhotos();
+  debouncedCreatePhoto(arrayDiscussed);
+  // createDescriptionPhoto(arrayDiscussed);
+  button.classList.add('img-filters__button--active');
 };
 
 
 const showfilterDefault = (array, button) => {
-  clearAddedPhotos();
-  createDescriptionPhoto(array);
-  removeActiveClassFromButtons();
-  button.classList.add('img-filters__button--active');
+  // clearAddedPhotos();
+  // createDescriptionPhoto(array);
+  // removeActiveClassFromButtons();
+  // button.classList.add('img-filters__button--active');
+  updatePhotoDisplay(array, button);
 };
 
 

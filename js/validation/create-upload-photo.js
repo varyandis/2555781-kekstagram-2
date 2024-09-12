@@ -1,5 +1,6 @@
 import { isEscapeKey } from '../util.js';
 import { resetSlider } from '../photo/edite-photo/nouislider.js';
+import { pristine } from './validation.js';
 
 const formBlock = document.querySelector('.img-upload__form');
 const elementUploadPhoto = formBlock.querySelector('.img-upload__input');
@@ -13,6 +14,7 @@ const onbuttonClose = () => {
   document.body.classList.remove('modal-open');
   formBlock.reset();
   resetSlider();
+  pristine.reset();
 };
 
 const onEscapeClose = (evt) => {

@@ -1,7 +1,9 @@
 const picturesList = document.querySelector('.pictures');
 const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
 const fileInput = document.querySelector('#upload-file');
-
+const preview = document.querySelectorAll('.effects__preview');
+const imagePreview = document.querySelector('.img-upload__preview img');
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const createDescriptionPhoto = (data) => {
   data.forEach(({id, url, description, likes, comments}) => {
     const item = templatePicture.cloneNode(true);
@@ -21,16 +23,14 @@ const createDescriptionPhoto = (data) => {
 
 fileInput.addEventListener('change', () => {
   const file = fileInput.files[0];
-
-  if (file) {
-    const reader = new FileReader();
-
-    reader.addEventListener('load', (event) => {
-      const imagePreview = document.querySelector('.img-upload__preview img');
-      imagePreview.src = event.target.result;
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    const objectURL = URL.createObjectURL(file);
+    imagePreview.src = objectURL;
+    preview.forEach((photo) => {
+      photo.style.backgroundImage = `url(${objectURL})`;
     });
-
-    reader.readAsDataURL(file);
   }
 });
 
