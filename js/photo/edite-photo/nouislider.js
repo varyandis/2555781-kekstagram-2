@@ -12,6 +12,14 @@ noUiSlider.create(sliderElement, {
   },
   start: 100,
   connect: 'lower',
+  format: {
+    to: function (value) {
+      return value;
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
 });
 
 const resetSlider = () => {
