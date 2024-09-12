@@ -14,6 +14,7 @@ const createDescriptionPhoto = (data) => {
     elementImage.src = url;
     elementImage.alt = description;
     elementImage.dataset.id = id;
+
     picturesList.append(item);
   });
 };
