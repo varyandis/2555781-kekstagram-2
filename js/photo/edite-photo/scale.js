@@ -11,9 +11,9 @@ const ScaleSettings = {
   DIVIDER: 100,
 };
 
-valueScalePhoto.disabled = true;
-
 let calculatedScale = ScaleSettings.MAX;
+
+valueScalePhoto.disabled = true;
 
 const updateScalePhoto = (value) => {
   photoScale.style.transform = `scale(${value / ScaleSettings.DIVIDER})`;
