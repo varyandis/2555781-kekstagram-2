@@ -1,4 +1,4 @@
-import { SLIDER_SETTINGS } from './data-filter.js';
+import { SLIDER_SETTINGS } from './slider-settings.js';
 
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderContainerElement = document.querySelector('.img-upload__effect-level');

@@ -1,4 +1,4 @@
-import { renderComment } from '../comments/render-comments.js';
+import { renderComment } from '../comments/comments.js';
 import { isEscapeKey } from '../util.js';
 
 const bodyElement = document.querySelector('body');

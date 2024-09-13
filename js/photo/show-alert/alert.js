@@ -1,5 +1,5 @@
 import { isEscapeKey } from '../../util';
-import { closeEditPhotoOverlay, onEscapeKeyCloseOverlay } from '../../validation/create-upload-photo';
+import { closeEditPhotoOverlay, onEscapeKeyCloseOverlay } from '../../validation/photo-edit-overlay';
 
 const templateAlertErrorElement = document.querySelector('#error').content.querySelector('.error');
 const templateAlertSuccessElement = document.querySelector('#success').content.querySelector('.success');

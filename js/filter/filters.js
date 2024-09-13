@@ -1,5 +1,5 @@
 import { shuffle, debounce } from '../util.js';
-import { renderPhotoDescriptions } from '../photo/add-user-photo-main-page.js';
+import { renderPhotoDescriptions } from '../photo/photo.js';
 
 const filtersElement = document.querySelector('.img-filters');
 const filterDefaultElement = document.querySelector('#filter-default');

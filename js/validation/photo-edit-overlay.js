@@ -1,6 +1,6 @@
 import { isEscapeKey } from '../util.js';
 import { resetSliderToDefault } from '../photo/edite-photo/nouislider.js';
-import { pristine } from './validation.js';
+import { pristine } from './form-validation.js';
 
 const formElement = document.querySelector('.img-upload__form');
 const uploadPhotoInputElement = formElement.querySelector('.img-upload__input');

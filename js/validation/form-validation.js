@@ -1,5 +1,5 @@
-import './create-upload-photo.js';
-import { blockSubmitButton, unblockSubmitButton } from '../photo/edite-photo/block-button.js';
+import './photo-edit-overlay.js';
+import { blockSubmitButton, unblockSubmitButton } from '../photo/edite-photo/submit-button.js';
 import { sendData } from '../api.js';
 
 const formElement = document.querySelector('.img-upload__form');
