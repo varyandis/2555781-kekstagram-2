@@ -1,8 +1,4 @@
-import './photo/photo.js';
-import './photo/photo-gallery.js';
-import './validation/form-validation.js';
 import './photo/edite-photo/effects.js';
-import './api.js';
 import { showFilterContainer } from './filter/filters.js';
 import { getData } from './api.js';
 import { renderPhotoDescriptions } from './photo/photo.js';
