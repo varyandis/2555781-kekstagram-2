@@ -1,4 +1,4 @@
-import { createTemplateComments } from '../comments/create-template-comments.js';
+import { renderComment } from '../comments/render-comments.js';
 import { isEscapeKey } from '../util.js';
 
 const bodyElement = document.querySelector('body');
@@ -18,7 +18,7 @@ let allComments = [];
 
 const onLoadMoreComments = () => {
   allComments.slice(indexLoadingComments, indexLoadingComments + STEP_LOADING_COMMENTS).forEach((element) => {
-    socialCommentsElement.append(createTemplateComments(element));
+    socialCommentsElement.append(renderComment(element));
     commentsShowCountElement.textContent = socialCommentsElement.children.length;
     if (indexLoadingComments >= (allComments.length - STEP_LOADING_COMMENTS) || allComments.length <= 5) {
       buttonCommentsLoaderElement.classList.add('hidden');
@@ -56,5 +56,5 @@ function closeBigPhoto (){
 
 buttonCommentsLoaderElement.addEventListener('click', onLoadMoreComments);
 
-export {displayBigPhoto as createBigPhoto, closeBigPhoto, onBigPhotoEscKeydownClose };
+export {displayBigPhoto, closeBigPhoto, onBigPhotoEscKeydownClose };
 

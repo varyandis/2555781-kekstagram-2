@@ -1,4 +1,4 @@
-import { sliderSetting } from './data-filter.js';
+import { SLIDER_SETTINGS } from './data-filter.js';
 
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderContainerElement = document.querySelector('.img-upload__effect-level');
@@ -30,7 +30,7 @@ const resetSliderToDefault = () => {
 
 const onSliderChange = (evt) => {
   const effectId = evt.target.id;
-  const effectSettings = sliderSetting[effectId];
+  const effectSettings = SLIDER_SETTINGS[effectId];
 
   if (effectId === 'effect-none') {
     resetSliderToDefault();
@@ -56,4 +56,4 @@ const onSliderChange = (evt) => {
 
 };
 
-export {onSliderChange as onPhotoSliderChange, resetSliderToDefault as resetSlider};
+export {onSliderChange, resetSliderToDefault};

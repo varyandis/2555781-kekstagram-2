@@ -37,18 +37,4 @@ const onFileInputChange = () => {
 
 fileInputElement.addEventListener('change', onFileInputChange);
 
-
-// fileInputElement.addEventListener('change', () => {
-//   const file = fileInputElement.files[0];
-//   const fileName = file.name.toLowerCase();
-//   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-//   if (matches) {
-//     const objectURL = URL.createObjectURL(file);
-//     imagePreviewElement.src = objectURL;
-//     previewElements.forEach((photo) => {
-//       photo.style.backgroundImage = `url(${objectURL})`;
-//     });
-//   }
-// });
-
-export {renderPhotoDescriptions as createDescriptionPhoto};
+export {renderPhotoDescriptions};

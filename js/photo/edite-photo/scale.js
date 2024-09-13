@@ -35,19 +35,4 @@ const onScaleSmallerButtonClick = () => {
 scaleBiggerButtonElement.addEventListener('click', onScaleBiggerButtonClick);
 scaleSmallerButtonElement.addEventListener('click', onScaleSmallerButtonClick);
 
-
-// scaleBiggerButtonElement.addEventListener('click', () => {
-//   if (currentScale < SCALE_SETTINGS.MAX) {
-//     currentScale += SCALE_SETTINGS.STEP;
-//     updatePhotoScale(currentScale);
-//   }
-// });
-
-// scaleSmallerButtonElement.addEventListener('click', () => {
-//   if (currentScale > SCALE_SETTINGS.MIN) {
-//     currentScale -= SCALE_SETTINGS.STEP;
-//     updatePhotoScale(currentScale);
-//   }
-// });
-
-export {updatePhotoScale as updateScalePhoto};
+export {updatePhotoScale};

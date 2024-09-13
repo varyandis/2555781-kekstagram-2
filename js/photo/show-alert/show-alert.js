@@ -1,6 +1,6 @@
 import { isEscapeKey } from '../../util';
-// import { onbuttonClose, onEscapeClose } from './validation/create-upload-photo';
-import { onbuttonClose, onEscapeClose } from '../../validation/create-upload-photo';
+import { closeEditPhotoOverlay, onEscapeKeyCloseOverlay } from '../../validation/create-upload-photo';
+
 const templateAlertErrorElement = document.querySelector('#error').content.querySelector('.error');
 const templateAlertSuccessElement = document.querySelector('#success').content.querySelector('.success');
 const templateAlertElement = document.querySelector('#data-error').content.querySelector('.data-error');
@@ -24,7 +24,7 @@ const closeAlert = (buttonElement, innerElement, containerElement) => {
     containerElement.remove();
     document.removeEventListener('keydown', onEscapeKeyPress);
     document.removeEventListener('click', onOutsideClick);
-    document.addEventListener('keydown', onEscapeClose);
+    document.addEventListener('keydown', onEscapeKeyCloseOverlay);
   }
 
   buttonElement.addEventListener('click', onAlertContainerClose);
@@ -32,9 +32,8 @@ const closeAlert = (buttonElement, innerElement, containerElement) => {
   document.addEventListener('click', onOutsideClick);
 };
 
-
 const showAlertError = () => {
-  document.removeEventListener('keydown', onEscapeClose);
+  document.removeEventListener('keydown', onEscapeKeyCloseOverlay);
 
   const errorContainer = templateAlertErrorElement.cloneNode(true);
   document.body.append(errorContainer);
@@ -47,7 +46,7 @@ const showAlertError = () => {
 
 
 const showAlertSuccess = () => {
-  onbuttonClose();
+  closeEditPhotoOverlay();
 
   const successContainer = templateAlertSuccessElement.cloneNode(true);
   document.body.append(successContainer);

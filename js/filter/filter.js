@@ -1,5 +1,5 @@
 import { shuffle, debounce } from '../util.js';
-import { createDescriptionPhoto } from '../photo/add-user-photo-main-page.js';
+import { renderPhotoDescriptions } from '../photo/add-user-photo-main-page.js';
 
 const filtersElement = document.querySelector('.img-filters');
 const filterDefaultElement = document.querySelector('#filter-default');
@@ -24,7 +24,7 @@ const clearAddedPhotos = () => {
 
 const debouncedCreatePhoto = debounce((data) => {
   clearAddedPhotos();
-  createDescriptionPhoto(data);
+  renderPhotoDescriptions(data);
 }, 500);
 
 const updatePhotoDisplay = (photosArray, buttonElement) => {
@@ -43,9 +43,6 @@ const showfilterRandom = (photosArray, buttonElement) => {
 
 const showfilterDiscussed = (photosArray, buttonElement) => {
   const discussedPhotos = photosArray.slice().sort((a, b) => b.comments.length - a.comments.length);
-  // removeActiveClassFromButtons();
-  // debouncedCreatePhoto(discussedPhotos);
-  // buttonElement.classList.add('img-filters__button--active');
   updatePhotoDisplay(discussedPhotos, buttonElement);
 };
 
@@ -53,7 +50,6 @@ const showfilterDiscussed = (photosArray, buttonElement) => {
 const showfilterDefault = (photosArray, buttonElement) => {
   updatePhotoDisplay(photosArray, buttonElement);
 };
-
 
 const filterPhotos = (data) => {
   const defaultPhotosArray = data;
@@ -71,5 +67,4 @@ const filterPhotos = (data) => {
   );
 };
 
-
-export {showFilterContainer, filterPhotos as filterPhoto};
+export {showFilterContainer, filterPhotos};

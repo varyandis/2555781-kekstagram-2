@@ -5,27 +5,27 @@ import './photo/edite-photo/edite-photo.js';
 import './api.js';
 import { showFilterContainer } from './filter/filter.js';
 import { getData } from './api.js';
-import { createDescriptionPhoto } from './photo/add-user-photo-main-page.js';
-import { openPhoto } from './photo/open-big-photo.js';
+import { renderPhotoDescriptions } from './photo/add-user-photo-main-page.js';
+import { openPhotoGallery } from './photo/open-big-photo.js';
 import { setUserFormSubmit } from './validation/validation.js';
 import { showAlertDowload, showAlertError, showAlertSuccess } from './photo/show-alert/show-alert.js';
-import { filterPhoto } from './filter/filter.js';
+import { filterPhotos } from './filter/filter.js';
 
 
 const onDataSuccess = (data) => {
   if (!data) {
     return;
   }
-  createDescriptionPhoto(data);
-  openPhoto(data);
-  filterPhoto(data);
+  renderPhotoDescriptions(data);
+  openPhotoGallery(data);
+  filterPhotos(data);
 };
 
 const onDataError = () => {
   showAlertDowload();
 };
 
-getData(onDataSuccess, onDataError, showFilterContainer, filterPhoto);
+getData(onDataSuccess, onDataError, showFilterContainer, filterPhotos);
 
 setUserFormSubmit(showAlertSuccess, showAlertError);
 

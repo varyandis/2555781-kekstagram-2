@@ -24,6 +24,7 @@ const validateHashtags = (values) => {
   }
   return flag;
 };
+
 const validateHashtagCount = (values) => {
   const hashtags = values.split(/\s+/).filter((tag) => tag.trim().length > 0);
   return hashtags.length <= MAX_HASHTAGS;
@@ -33,11 +34,13 @@ const isAllSpaces = (values) => {
   const validPattern = /^(?![\s]*$).*|^$/;
   return validPattern.test(values);
 };
+
 const validateHashtagRepeat = (values) => {
   const arrayHashtags = values.toUpperCase().split(/\s+/).filter((tag) => tag.trim().length > 0);
   const duplicates = arrayHashtags.filter((elem, index, array) => array.indexOf(elem) !== index);
   return duplicates.length === 0;
 };
+
 const validateCommentLenght = (values) => values.length < MAX_COMMENT_LENGTH;
 
 
@@ -61,6 +64,5 @@ const setUserFormSubmit = (onSuccess, onError) => {
     }
   });
 };
-
 
 export {setUserFormSubmit, pristine};

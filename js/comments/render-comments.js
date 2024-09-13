@@ -21,4 +21,4 @@ const renderComment = ({avatar, name, message}) => {
 };
 
 
-export {renderComment as createTemplateComments};
+export {renderComment};

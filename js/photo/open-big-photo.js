@@ -1,4 +1,4 @@
-import {createBigPhoto, onBigPhotoEscKeydownClose, closeBigPhoto} from './create-big-photo.js';
+import {displayBigPhoto, onBigPhotoEscKeydownClose, closeBigPhoto} from './create-big-photo.js';
 
 const bigPhotoBlockElement = document.querySelector('.big-picture');
 const pictureCollectionElement = document.querySelector('.pictures');
@@ -16,7 +16,7 @@ const openPhotoGallery = (photoData) => {
       const photoId = pictureElement.querySelector('.picture__img').dataset.id;
       const photoObject = photoData.find((item) => photoId === String(item.id));
       bigPhotoBlockElement.classList.remove('hidden');
-      createBigPhoto(photoObject);
+      displayBigPhoto(photoObject);
       bodyElement.classList.add('modal-open');
       buttonCloseElement.addEventListener('click', closeBigPhoto);
       document.addEventListener('keydown', onBigPhotoEscKeydownClose);
@@ -24,4 +24,4 @@ const openPhotoGallery = (photoData) => {
   });
 };
 
-export {openPhotoGallery as openPhoto};
+export {openPhotoGallery};

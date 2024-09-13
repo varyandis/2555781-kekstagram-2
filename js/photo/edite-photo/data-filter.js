@@ -42,4 +42,4 @@ const SLIDER_SETTINGS = {
   },
 };
 
-export {SLIDER_SETTINGS as sliderSetting};
+export {SLIDER_SETTINGS};
