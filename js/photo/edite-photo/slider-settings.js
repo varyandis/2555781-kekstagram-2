@@ -1,4 +1,4 @@
-const sliderSetting = {
+const SLIDER_SETTINGS = {
   'effect-none': 'none',
 
   'effect-chrome': {
@@ -42,4 +42,4 @@ const sliderSetting = {
   },
 };
 
-export {sliderSetting};
+export {SLIDER_SETTINGS};

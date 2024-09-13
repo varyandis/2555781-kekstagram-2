@@ -1,27 +1,27 @@
-import './photo/add-user-photo-main-page.js';
-import './photo/open-big-photo.js';
-import './validation/validation.js';
-import './photo/edite-photo/edite-photo.js';
-import './api.js';
+import './photo/edite-photo/effects.js';
+import { showFilterContainer } from './filter/filters.js';
 import { getData } from './api.js';
-import { createDescriptionPhoto } from './photo/add-user-photo-main-page.js';
-import { openPhoto } from './photo/open-big-photo.js';
-import { setUserFormSubmit } from './validation/validation.js';
-import { showAlertDowload, showAlertError, showAlertSuccess } from './util.js';
+import { renderPhotoDescriptions } from './photo/photo.js';
+import { openPhotoGallery } from './photo/photo-gallery.js';
+import { setUserFormSubmit } from './validation/form-validation.js';
+import { showAlertDowload, showAlertError, showAlertSuccess } from './photo/show-alert/alert.js';
+import { filterPhotos } from './filter/filters.js';
+
 
 const onDataSuccess = (data) => {
   if (!data) {
     return;
   }
-  createDescriptionPhoto(data);
-  openPhoto(data);
+  renderPhotoDescriptions(data);
+  openPhotoGallery(data);
+  filterPhotos(data);
 };
 
 const onDataError = () => {
   showAlertDowload();
 };
 
-
-getData(onDataSuccess, onDataError);
+getData(onDataSuccess, onDataError, showFilterContainer, filterPhotos);
 
 setUserFormSubmit(showAlertSuccess, showAlertError);
+
