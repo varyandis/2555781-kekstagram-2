@@ -7,7 +7,6 @@ import { setUserFormSubmit } from './validation/form-validation.js';
 import { showAlertDowload, showAlertError, showAlertSuccess } from './photo/show-alert/alert.js';
 import { filterPhotos } from './filter/filters.js';
 
-
 const onDataSuccess = (data) => {
   if (!data) {
     return;
