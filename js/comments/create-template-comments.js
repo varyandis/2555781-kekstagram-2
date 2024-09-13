@@ -1,21 +1,24 @@
-//  Создание теплейта для комментариев
-const createTemplateComments = ({avatar, name, message}) => {
-  const container = document.createElement('li');
-  const text = document.createElement('p');
-  const image = new Image(35, 35);
+const socialCommentsElement = document.querySelector('.social__comments');
 
-  container.classList.add('social__comment');
-  text.classList.add('social__text');
-  image.classList.add('social__picture');
+socialCommentsElement.innerHTML = '';
 
-  image.src = avatar;
-  image.alt = name;
-  text.textContent = message;
+const renderComment = ({avatar, name, message}) => {
+  const commentElement = document.createElement('li');
+  const textElement = document.createElement('p');
+  const imageElement = new Image(35, 35);
 
-  container.append(image);
-  container.append(text);
-  return container;
+  commentElement.classList.add('social__comment');
+  textElement.classList.add('social__text');
+  imageElement.classList.add('social__picture');
+
+  imageElement.src = avatar;
+  imageElement.alt = name;
+  textElement.textContent = message;
+
+  commentElement.append(imageElement);
+  commentElement.append(textElement);
+  return commentElement;
 };
 
 
-export {createTemplateComments};
+export {renderComment as createTemplateComments};

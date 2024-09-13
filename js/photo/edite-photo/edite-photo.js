@@ -1,8 +1,8 @@
 import './scale.js';
 import { onPhotoSliderChange } from './nouislider.js';
 
-const effectListItems = document.querySelectorAll('.effects__radio');
+const effectRadioElements = document.querySelectorAll('.effects__radio');
 
-effectListItems.forEach((elem) => {
-  elem.addEventListener('change', onPhotoSliderChange);
+effectRadioElements.forEach((radioElement) => {
+  radioElement.addEventListener('change', onPhotoSliderChange);
 });

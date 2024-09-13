@@ -1,115 +1,75 @@
 import { shuffle, debounce } from '../util.js';
 import { createDescriptionPhoto } from '../photo/add-user-photo-main-page.js';
 
-const filters = document.querySelector('.img-filters');
-const filterDefault = document.querySelector('#filter-default');
-const filterRandom = document.querySelector('#filter-random');
-const filterDiscussed = document.querySelector('#filter-discussed');
+const filtersElement = document.querySelector('.img-filters');
+const filterDefaultElement = document.querySelector('#filter-default');
+const filterRandomElement = document.querySelector('#filter-random');
+const filterDiscussedElement = document.querySelector('#filter-discussed');
 
 const removeActiveClassFromButtons = () => {
   const filterButtons = document.querySelectorAll('.img-filters__button');
-  filterButtons.forEach((button) => {
-    button.classList.remove('img-filters__button--active');
+  filterButtons.forEach((buttonElement) => {
+    buttonElement.classList.remove('img-filters__button--active');
   });
 };
 
 const showFilterContainer = () => {
-  filters.classList.remove('img-filters--inactive');
+  filtersElement.classList.remove('img-filters--inactive');
 };
 
 const clearAddedPhotos = () => {
-  const addedPhotos = document.querySelectorAll('a.picture');
-  addedPhotos.forEach((photo) => photo.remove());
+  const addedPhotoElements = document.querySelectorAll('a.picture');
+  addedPhotoElements.forEach((photoElement) => photoElement.remove());
 };
-// const debouncedclearAddedPhotos = debounce(() => {
-//   clearAddedPhotos();
-// }, 500);
 
 const debouncedCreatePhoto = debounce((data) => {
-
   clearAddedPhotos();
-  // debouncedclearAddedPhotos()
   createDescriptionPhoto(data);
 }, 500);
 
-
-const updatePhotoDisplay = (array, button) => {
+const updatePhotoDisplay = (photosArray, buttonElement) => {
   removeActiveClassFromButtons();
-  debouncedCreatePhoto(array);
-  // createDescriptionPhoto(array);
-  // debouncedclearAddedPhotos();
-  button.classList.add('img-filters__button--active');
+  debouncedCreatePhoto(photosArray);
+  buttonElement.classList.add('img-filters__button--active');
 };
 
-const showfilterRandom = (array, button) => {
-  const shuffleArrayRandom = array.slice();
-  shuffle(shuffleArrayRandom);
-  const arrayRandom = shuffleArrayRandom.slice(0, 10);
-  updatePhotoDisplay(arrayRandom, button);
+const showfilterRandom = (photosArray, buttonElement) => {
+  const shuffledArray = photosArray.slice();
+  shuffle(shuffledArray);
+  const randomPhotos = shuffledArray.slice(0, 10);
+  updatePhotoDisplay(randomPhotos, buttonElement);
 
 };
 
-const showfilterDiscussed = (array, button) => {
-  const arrayDiscussed = array.slice().sort((a, b) => b.comments.length - a.comments.length);
-  removeActiveClassFromButtons();
-  // clearAddedPhotos();
-  debouncedCreatePhoto(arrayDiscussed);
-  // createDescriptionPhoto(arrayDiscussed);
-  button.classList.add('img-filters__button--active');
-};
-
-
-const showfilterDefault = (array, button) => {
-  // clearAddedPhotos();
-  // createDescriptionPhoto(array);
+const showfilterDiscussed = (photosArray, buttonElement) => {
+  const discussedPhotos = photosArray.slice().sort((a, b) => b.comments.length - a.comments.length);
   // removeActiveClassFromButtons();
-  // button.classList.add('img-filters__button--active');
-  updatePhotoDisplay(array, button);
+  // debouncedCreatePhoto(discussedPhotos);
+  // buttonElement.classList.add('img-filters__button--active');
+  updatePhotoDisplay(discussedPhotos, buttonElement);
 };
 
 
-const filterPhoto = (data) => {
-  const arrayDefault = data;
+const showfilterDefault = (photosArray, buttonElement) => {
+  updatePhotoDisplay(photosArray, buttonElement);
+};
 
-  filterDefault.addEventListener('click', () => {
-    showfilterDefault(arrayDefault, filterDefault);
+
+const filterPhotos = (data) => {
+  const defaultPhotosArray = data;
+
+  filterDefaultElement.addEventListener('click', () => {
+    showfilterDefault(defaultPhotosArray, filterDefaultElement);
   });
-  filterRandom.addEventListener('click', () => {
-    showfilterRandom(arrayDefault, filterRandom);
+  filterRandomElement.addEventListener('click', () => {
+    showfilterRandom(defaultPhotosArray, filterRandomElement);
   }
   );
-  filterDiscussed.addEventListener('click', () => {
-    showfilterDiscussed(arrayDefault, filterDiscussed);
+  filterDiscussedElement.addEventListener('click', () => {
+    showfilterDiscussed(defaultPhotosArray, filterDiscussedElement);
   }
   );
-
-  // filterDefault.addEventListener('click', () => {
-  //   showfilterDefault(arrayDefault);
-  // });
-  // filterRandom.addEventListener('click', () => {
-  //   showfilterRandom(arrayDefault);
-  // }
-  // );
-  // filterDiscussed.addEventListener('click', () => {
-  //   showfilterDiscussed(arrayDefault);
-
-  // }
-  // );
 };
 
 
-export {showFilterContainer, filterPhoto};
-// export {showFilterContainer};
-// const filt = {
-//   filterDefault: (data) => data,
-//   filterDiscussed: (data) => data.slice().sort((a, b) => b.comments.length - a.comments.length),
-//   filterRandom: (data) => shuffle(data.slice())
-// }
-
-// const onClick = (data, filter, button) => {
-// console.log(data)
-// console.log(filter)
-// console.log(button)
-// }
-// const o = [filterDefault, filterRandom, filterDiscussed];
-// o.forEach((n, i) => n.addEventListener('click', () => onClick(arrayDefault, o[i], n)));
+export {showFilterContainer, filterPhotos as filterPhoto};

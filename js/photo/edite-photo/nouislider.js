@@ -1,9 +1,9 @@
 import { sliderSetting } from './data-filter.js';
 
 const sliderElement = document.querySelector('.effect-level__slider');
-const sliderConteiner = document.querySelector('.img-upload__effect-level');
-const targetPhoto = document.querySelector('.img-upload__preview img');
-const calculatedValueSlider = sliderConteiner.querySelector('.effect-level__value');
+const sliderContainerElement = document.querySelector('.img-upload__effect-level');
+const targetPhotoElement = document.querySelector('.img-upload__preview img');
+const calculatedValueSliderElement = sliderContainerElement.querySelector('.effect-level__value');
 
 noUiSlider.create(sliderElement, {
   range: {
@@ -22,38 +22,38 @@ noUiSlider.create(sliderElement, {
   },
 });
 
-const resetSlider = () => {
-  sliderConteiner.classList.add('hidden');
-  targetPhoto.style.filter = 'none';
+const resetSliderToDefault = () => {
+  sliderContainerElement.classList.add('hidden');
+  targetPhotoElement.style.filter = 'none';
 };
 
 
-const onPhotoSliderChange = (evt) => {
-  const idEffect = evt.target.id;
-  const effect = sliderSetting[idEffect];
+const onSliderChange = (evt) => {
+  const effectId = evt.target.id;
+  const effectSettings = sliderSetting[effectId];
 
-  if (idEffect === 'effect-none') {
-    resetSlider();
+  if (effectId === 'effect-none') {
+    resetSliderToDefault();
     return;
   }
 
-  sliderConteiner.classList.remove('hidden');
+  sliderContainerElement.classList.remove('hidden');
 
   sliderElement.noUiSlider.updateOptions({
     range: {
-      min: effect.minValue,
-      max: effect.maxValue,
+      min: effectSettings.minValue,
+      max: effectSettings.maxValue,
     },
-    start: effect.maxValue,
-    step: effect.step
+    start: effectSettings.maxValue,
+    step: effectSettings.step
   });
 
   sliderElement.noUiSlider.on('update', () => {
-    const valueSlider = sliderElement.noUiSlider.get();
-    targetPhoto.style.filter = `${effect.name}(${valueSlider}${effect.unit})`;
-    calculatedValueSlider.setAttribute('value', valueSlider);
+    const sliderValue = sliderElement.noUiSlider.get();
+    targetPhotoElement.style.filter = `${effectSettings.name}(${sliderValue}${effectSettings.unit})`;
+    calculatedValueSliderElement.setAttribute('value', sliderValue);
   });
 
 };
 
-export {onPhotoSliderChange, resetSlider};
+export {onSliderChange as onPhotoSliderChange, resetSliderToDefault as resetSlider};

@@ -1,27 +1,27 @@
 import {createBigPhoto, onBigPhotoEscKeydownClose, closeBigPhoto} from './create-big-photo.js';
 
-const bigPhotoBlock = document.querySelector('.big-picture');
-const pictureCollection = document.querySelector('.pictures');
-const body = document.querySelector('body');
+const bigPhotoBlockElement = document.querySelector('.big-picture');
+const pictureCollectionElement = document.querySelector('.pictures');
+const bodyElement = document.querySelector('body');
 
-const sliderConteiner = document.querySelector('.img-upload__effect-level');
-const buttonClose = bigPhotoBlock.querySelector('.cancel');
+const sliderContainerElement = document.querySelector('.img-upload__effect-level');
+const buttonCloseElement = bigPhotoBlockElement.querySelector('.cancel');
 
-sliderConteiner.classList.add('hidden');
+sliderContainerElement.classList.add('hidden');
 
-const openPhoto = (data) => {
-  pictureCollection.addEventListener('click', (evt) => {
+const openPhotoGallery = (photoData) => {
+  pictureCollectionElement.addEventListener('click', (evt) => {
     const pictureElement = evt.target.closest('.picture');
     if (pictureElement) {
       const photoId = pictureElement.querySelector('.picture__img').dataset.id;
-      const objectPhoto = data.find((item) => photoId === String(item.id));
-      bigPhotoBlock.classList.remove('hidden');
-      createBigPhoto(objectPhoto);
-      body.classList.add('modal-open');
-      buttonClose.addEventListener('click', closeBigPhoto);
+      const photoObject = photoData.find((item) => photoId === String(item.id));
+      bigPhotoBlockElement.classList.remove('hidden');
+      createBigPhoto(photoObject);
+      bodyElement.classList.add('modal-open');
+      buttonCloseElement.addEventListener('click', closeBigPhoto);
       document.addEventListener('keydown', onBigPhotoEscKeydownClose);
     }
   });
 };
 
-export {openPhoto};
+export {openPhotoGallery as openPhoto};

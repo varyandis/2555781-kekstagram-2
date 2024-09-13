@@ -2,48 +2,48 @@ import { isEscapeKey } from '../util.js';
 import { resetSlider } from '../photo/edite-photo/nouislider.js';
 import { pristine } from './validation.js';
 
-const formBlock = document.querySelector('.img-upload__form');
-const elementUploadPhoto = formBlock.querySelector('.img-upload__input');
-const elementEditePhoto = formBlock.querySelector('.img-upload__overlay');
-const buttonClose = formBlock.querySelector('.img-upload__cancel');
-const fieldComments = formBlock.querySelector('.text__description');
-const fieldHashtag = formBlock.querySelector('.text__hashtags');
+const formElement = document.querySelector('.img-upload__form');
+const uploadPhotoInputElement = formElement.querySelector('.img-upload__input');
+const editPhotoOverlayElement = formElement.querySelector('.img-upload__overlay');
+const closeButtonElement = formElement.querySelector('.img-upload__cancel');
+const commentsFieldElement = formElement.querySelector('.text__description');
+const hashtagsFieldElement = formElement.querySelector('.text__hashtags');
 
-const onbuttonClose = () => {
-  elementEditePhoto.classList.add('hidden');
+const closeEditPhotoOverlay = () => {
+  editPhotoOverlayElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  formBlock.reset();
+  formElement.reset();
   resetSlider();
   pristine.reset();
 };
 
-const onEscapeClose = (evt) => {
+const onEscapeKeyCloseOverlay = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    onbuttonClose();
+    closeEditPhotoOverlay();
   }
 };
 
-const onButtonLoader = () => {
-  elementEditePhoto.classList.remove('hidden');
+const onPhotoOverlayOpen = () => {
+  editPhotoOverlayElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  buttonClose.addEventListener('click', onbuttonClose);
-  document.addEventListener('keydown', onEscapeClose);
+  closeButtonElement.addEventListener('click', closeEditPhotoOverlay);
+  document.addEventListener('keydown', onEscapeKeyCloseOverlay);
 };
 
 
-const fields = [fieldComments, fieldHashtag];
+const focusFieldElements = [commentsFieldElement, hashtagsFieldElement];
 
-fields.forEach((field) => {
-  field.addEventListener('focus',() => {
-    document.removeEventListener('keydown', onEscapeClose);
+focusFieldElements.forEach((fieldElement) => {
+  fieldElement.addEventListener('focus',() => {
+    document.removeEventListener('keydown', onEscapeKeyCloseOverlay);
   });
-  field.addEventListener('blur',() => {
-    document.addEventListener('keydown', onEscapeClose);
+  fieldElement.addEventListener('blur',() => {
+    document.addEventListener('keydown', onEscapeKeyCloseOverlay);
   });
 });
 
 
-elementUploadPhoto.addEventListener('change', onButtonLoader);
+uploadPhotoInputElement.addEventListener('change', onPhotoOverlayOpen);
 
-export {onbuttonClose, onEscapeClose};
+export {closeEditPhotoOverlay as onbuttonClose, onEscapeKeyCloseOverlay as onEscapeClose};

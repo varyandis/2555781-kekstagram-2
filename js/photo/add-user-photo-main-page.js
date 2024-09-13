@@ -1,37 +1,54 @@
-const picturesList = document.querySelector('.pictures');
-const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
-const fileInput = document.querySelector('#upload-file');
-const preview = document.querySelectorAll('.effects__preview');
-const imagePreview = document.querySelector('.img-upload__preview img');
+const picturesListElement = document.querySelector('.pictures');
+const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
+const fileInputElement = document.querySelector('#upload-file');
+const previewElements = document.querySelectorAll('.effects__preview');
+const imagePreviewElement = document.querySelector('.img-upload__preview img');
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
-const createDescriptionPhoto = (data) => {
-  data.forEach(({id, url, description, likes, comments}) => {
-    const item = templatePicture.cloneNode(true);
-    const elementImage = item.querySelector('.picture__img');
-    const elementLikes = item.querySelector('.picture__likes');
-    const elementComments = item.querySelector('.picture__comments');
 
-    elementLikes.textContent = likes;
-    elementComments.textContent = Object.keys(comments).length;
-    elementImage.src = url;
-    elementImage.alt = description;
-    elementImage.dataset.id = id;
+const renderPhotoDescriptions = (photosData) => {
+  photosData.forEach(({id, url, description, likes, comments}) => {
+    const photoItemElement = pictureTemplateElement.cloneNode(true);
+    const photoImageElement = photoItemElement.querySelector('.picture__img');
+    const photoLikesElement = photoItemElement.querySelector('.picture__likes');
+    const photoCommentsElement = photoItemElement.querySelector('.picture__comments');
 
-    picturesList.append(item);
+    photoLikesElement.textContent = likes;
+    photoCommentsElement.textContent = Object.keys(comments).length;
+    photoImageElement.src = url;
+    photoImageElement.alt = description;
+    photoImageElement.dataset.id = id;
+
+    picturesListElement.append(photoItemElement);
   });
 };
 
-fileInput.addEventListener('change', () => {
-  const file = fileInput.files[0];
+const onFileInputChange = () => {
+  const file = fileInputElement.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
   if (matches) {
     const objectURL = URL.createObjectURL(file);
-    imagePreview.src = objectURL;
-    preview.forEach((photo) => {
-      photo.style.backgroundImage = `url(${objectURL})`;
+    imagePreviewElement.src = objectURL;
+    previewElements.forEach((previewElement) => {
+      previewElement.style.backgroundImage = `url(${objectURL})`;
     });
   }
-});
+};
 
-export {createDescriptionPhoto};
+fileInputElement.addEventListener('change', onFileInputChange);
+
+
+// fileInputElement.addEventListener('change', () => {
+//   const file = fileInputElement.files[0];
+//   const fileName = file.name.toLowerCase();
+//   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+//   if (matches) {
+//     const objectURL = URL.createObjectURL(file);
+//     imagePreviewElement.src = objectURL;
+//     previewElements.forEach((photo) => {
+//       photo.style.backgroundImage = `url(${objectURL})`;
+//     });
+//   }
+// });
+
+export {renderPhotoDescriptions as createDescriptionPhoto};

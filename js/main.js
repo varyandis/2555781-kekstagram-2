@@ -8,7 +8,7 @@ import { getData } from './api.js';
 import { createDescriptionPhoto } from './photo/add-user-photo-main-page.js';
 import { openPhoto } from './photo/open-big-photo.js';
 import { setUserFormSubmit } from './validation/validation.js';
-import { showAlertDowload, showAlertError, showAlertSuccess } from './util.js';
+import { showAlertDowload, showAlertError, showAlertSuccess } from './photo/show-alert/show-alert.js';
 import { filterPhoto } from './filter/filter.js';
 
 
@@ -19,8 +19,6 @@ const onDataSuccess = (data) => {
   createDescriptionPhoto(data);
   openPhoto(data);
   filterPhoto(data);
-  // console.log(data)
-  // console.log(shuffle(data))
 };
 
 const onDataError = () => {
