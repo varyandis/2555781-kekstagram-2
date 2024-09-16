@@ -1,38 +1,43 @@
-const scalePhoto = document.querySelector('.img-upload__overlay');
-const photoScale = document.querySelector('.img-upload__preview img');
-const valueScalePhoto = scalePhoto.querySelector('.scale__control--value');
-const buttonScaleSmaller = scalePhoto.querySelector('.scale__control--smaller');
-const buttonScaleBigger = scalePhoto.querySelector('.scale__control--bigger');
+const scaleContainerElement = document.querySelector('.img-upload__overlay');
+const photoElement = document.querySelector('.img-upload__preview img');
+const scaleValueElement = scaleContainerElement.querySelector('.scale__control--value');
+const scaleSmallerButtonElement = scaleContainerElement.querySelector('.scale__control--smaller');
+const scaleBiggerButtonElement = scaleContainerElement.querySelector('.scale__control--bigger');
 
-const ScaleSettings = {
+const SCALE_SETTINGS = {
   STEP: 25,
   MIN: 25,
   MAX: 100,
   DIVIDER: 100,
 };
 
-let calculatedScale = ScaleSettings.MAX;
+let currentScale = SCALE_SETTINGS.MAX;
 
-valueScalePhoto.disabled = true;
-
-const updateScalePhoto = (value) => {
-  photoScale.style.transform = `scale(${value / ScaleSettings.DIVIDER})`;
-  valueScalePhoto.setAttribute('value', `${calculatedScale}%`);
+const updatePhotoScale = (scaleValue) => {
+  photoElement.style.transform = `scale(${scaleValue / SCALE_SETTINGS.DIVIDER})`;
+  scaleValueElement.value = `${scaleValue}%`;
 };
 
-buttonScaleBigger.addEventListener('click', () => {
-  if (calculatedScale < ScaleSettings.MAX) {
-    calculatedScale += ScaleSettings.STEP;
-    updateScalePhoto(calculatedScale);
+const onScaleBiggerButtonClick = () => {
+  if (currentScale < SCALE_SETTINGS.MAX) {
+    currentScale += SCALE_SETTINGS.STEP;
+    updatePhotoScale(currentScale);
   }
-});
+};
 
-buttonScaleSmaller.addEventListener('click', () => {
-  if (calculatedScale > ScaleSettings.MIN) {
-
-    calculatedScale -= ScaleSettings.STEP;
-    updateScalePhoto(calculatedScale);
+const onScaleSmallerButtonClick = () => {
+  if (currentScale > SCALE_SETTINGS.MIN) {
+    currentScale -= SCALE_SETTINGS.STEP;
+    updatePhotoScale(currentScale);
   }
-});
+};
 
-export {updateScalePhoto};
+const updateCurrentScale = () => {
+  currentScale = SCALE_SETTINGS.MAX;
+  photoElement.style.transform = `scale(${SCALE_SETTINGS.MAX / SCALE_SETTINGS.DIVIDER})`;
+};
+
+scaleBiggerButtonElement.addEventListener('click', onScaleBiggerButtonClick);
+scaleSmallerButtonElement.addEventListener('click', onScaleSmallerButtonClick);
+
+export {updatePhotoScale, updateCurrentScale};
