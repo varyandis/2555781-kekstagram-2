@@ -34,7 +34,7 @@ const onScaleSmallerButtonClick = () => {
 
 const updateCurrentScale = () => {
   currentScale = SCALE_SETTINGS.MAX;
-  photoElement.style.transform = `scale(${currentScale  / SCALE_SETTINGS.DIVIDER})`;
+  photoElement.style.transform = `scale(${currentScale / SCALE_SETTINGS.DIVIDER})`;
 };
 
 scaleBiggerButtonElement.addEventListener('click', onScaleBiggerButtonClick);
